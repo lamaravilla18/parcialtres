@@ -1,7 +1,7 @@
 package com.parcialtres.demo.controller;
 
+import com.parcialtres.demo.dto.CarritoResponse;
 import com.parcialtres.demo.dto.CrearCarritoRequest;
-import com.parcialtres.demo.entity.CarritoDeCompras;
 import com.parcialtres.demo.service.CarritoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class CarritoController {
             Authentication authentication) {
         try {
             String email = authentication.getName();
-            CarritoDeCompras carrito = carritoService.crearCarrito(email, request);
+            CarritoResponse carrito = carritoService.crearCarrito(email, request);
             return ResponseEntity.status(HttpStatus.CREATED).body(carrito);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(
@@ -50,7 +50,7 @@ public class CarritoController {
             Authentication authentication) {
         try {
             String email = authentication.getName();
-            CarritoDeCompras carrito = carritoService.listarCarrito(email, carritoId);
+            CarritoResponse carrito = carritoService.listarCarrito(email, carritoId);
             return ResponseEntity.ok(carrito);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
@@ -63,9 +63,9 @@ public class CarritoController {
      */
     @GetMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<CarritoDeCompras>> listarMisCarritos(Authentication authentication) {
+    public ResponseEntity<List<CarritoResponse>> listarMisCarritos(Authentication authentication) {
         String email = authentication.getName();
-        List<CarritoDeCompras> carritos = carritoService.listarCarritosUsuario(email);
+        List<CarritoResponse> carritos = carritoService.listarCarritosUsuario(email);
         return ResponseEntity.ok(carritos);
     }
 
