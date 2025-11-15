@@ -1,6 +1,6 @@
 package com.parcialtres.demo.controller;
 
-import com.parcialtres.demo.entity.Comentario;
+import com.parcialtres.demo.dto.ComentarioResponse;
 import com.parcialtres.demo.service.ComentarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,10 +23,10 @@ public class ComentarioController {
      * @return Lista de comentarios creados desde la fecha indicada
      */
     @GetMapping("/desde-fecha")
-    public ResponseEntity<List<Comentario>> listarComentariosDesde(
+    public ResponseEntity<List<ComentarioResponse>> listarComentariosDesde(
             @RequestParam(name = "fecha") 
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
-        List<Comentario> comentarios = comentarioService.listarComentariosDesde(fecha);
+        List<ComentarioResponse> comentarios = comentarioService.listarComentariosDesde(fecha);
         return ResponseEntity.ok(comentarios);
     }
 
@@ -35,8 +35,8 @@ public class ComentarioController {
      * @return Lista de todos los comentarios
      */
     @GetMapping
-    public ResponseEntity<List<Comentario>> listarTodos() {
-        List<Comentario> comentarios = comentarioService.listarTodos();
+    public ResponseEntity<List<ComentarioResponse>> listarTodos() {
+        List<ComentarioResponse> comentarios = comentarioService.listarTodos();
         return ResponseEntity.ok(comentarios);
     }
 }

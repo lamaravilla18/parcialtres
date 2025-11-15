@@ -1,6 +1,6 @@
 package com.parcialtres.demo.controller;
 
-import com.parcialtres.demo.entity.Producto;
+import com.parcialtres.demo.dto.ProductoResponse;
 import com.parcialtres.demo.service.ProductoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +21,9 @@ public class ProductoController {
      * @return Lista de productos con stock menor a la cantidad
      */
     @GetMapping("/stock-menor")
-    public ResponseEntity<List<Producto>> listarProductosConStockMenor(
+    public ResponseEntity<List<ProductoResponse>> listarProductosConStockMenor(
             @RequestParam(name = "cantidad") Integer cantidad) {
-        List<Producto> productos = productoService.listarProductosConStockMenorA(cantidad);
+        List<ProductoResponse> productos = productoService.listarProductosConStockMenorA(cantidad);
         return ResponseEntity.ok(productos);
     }
 
@@ -32,8 +32,8 @@ public class ProductoController {
      * @return Lista de todos los productos
      */
     @GetMapping
-    public ResponseEntity<List<Producto>> listarTodos() {
-        List<Producto> productos = productoService.listarTodos();
+    public ResponseEntity<List<ProductoResponse>> listarTodos() {
+        List<ProductoResponse> productos = productoService.listarTodos();
         return ResponseEntity.ok(productos);
     }
 }
